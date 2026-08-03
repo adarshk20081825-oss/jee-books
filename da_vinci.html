@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Page</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #4a3a41;
+    background: linear-gradient(180deg, #fbd3e9 0%, #ffe3ef 45%, #fff5f8 75%);
+    position: relative;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .skyline {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    width: 100%;
+    padding: 60px 20px 380px;
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    color: #b84b74;
+    margin-bottom: 30px;
+  }
+
+  img {
+    max-width: 90%;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #f3c6d6;
+    border-radius: 8px;
+    background: #fff;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 10px 28px;
+    background: #e88ba8;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  .btn:hover {
+    background: #de7597;
+  }
+</style>
+</head>
+<body>
+
+  <div class="content">
+    <h1>Greatest Drawing by an IIT Aspirant</h1>
+    <a class="btn" href="https://example.com" target="_blank">View</a>
+  </div>
+
+  <svg class="skyline" viewBox="0 0 800 300" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+    <!-- back row, lighter -->
+    <g fill="#f3b6cf">
+      <rect x="0"   y="140" width="60" height="160"/>
+      <rect x="70"  y="110" width="50" height="190"/>
+      <rect x="130" y="160" width="70" height="140"/>
+      <rect x="210" y="90"  width="55" height="210"/>
+      <rect x="275" y="150" width="65" height="150"/>
+      <rect x="350" y="120" width="50" height="180"/>
+      <rect x="410" y="170" width="70" height="130"/>
+      <rect x="490" y="100" width="55" height="200"/>
+      <rect x="555" y="150" width="65" height="150"/>
+      <rect x="630" y="120" width="50" height="180"/>
+      <rect x="690" y="160" width="60" height="140"/>
+      <rect x="750" y="130" width="50" height="170"/>
+    </g>
+    <!-- front row, darker -->
+    <g fill="#e88ba8">
+      <rect x="20"  y="190" width="45" height="110"/>
+      <rect x="90"  y="220" width="60" height="80"/>
+      <rect x="170" y="200" width="40" height="100"/>
+      <rect x="230" y="230" width="55" height="70"/>
+      <rect x="310" y="205" width="45" height="95"/>
+      <rect x="380" y="235" width="60" height="65"/>
+      <rect x="460" y="210" width="40" height="90"/>
+      <rect x="520" y="225" width="55" height="75"/>
+      <rect x="600" y="200" width="45" height="100"/>
+      <rect x="665" y="230" width="60" height="70"/>
+      <rect x="745" y="215" width="40" height="85"/>
+    </g>
+    <!-- little windows -->
+    <g fill="#fff0f6" opacity="0.7">
+      <rect x="30" y="200" width="6" height="6"/>
+      <rect x="45" y="200" width="6" height="6"/>
+      <rect x="30" y="215" width="6" height="6"/>
+      <rect x="45" y="215" width="6" height="6"/>
+      <rect x="105" y="235" width="6" height="6"/>
+      <rect x="120" y="235" width="6" height="6"/>
+      <rect x="105" y="250" width="6" height="6"/>
+      <rect x="120" y="250" width="6" height="6"/>
+      <rect x="245" y="245" width="6" height="6"/>
+      <rect x="260" y="245" width="6" height="6"/>
+      <rect x="395" y="250" width="6" height="6"/>
+      <rect x="410" y="250" width="6" height="6"/>
+      <rect x="535" y="240" width="6" height="6"/>
+      <rect x="550" y="240" width="6" height="6"/>
+      <rect x="680" y="245" width="6" height="6"/>
+      <rect x="695" y="245" width="6" height="6"/>
+    </g>
+  </svg>
+
+</body>
+</html>
