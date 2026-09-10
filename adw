@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Pretty in Pink 💗</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ffd6e7, #ff9fc5, #ffc1dc);
+      color: #8b174f;
+      overflow-x: hidden;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 25px;
+      animation: float 7s linear infinite;
+      pointer-events: none;
+    }
+
+    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .heart:nth-child(2) { left: 25%; animation-delay: 2s; }
+    .heart:nth-child(3) { left: 45%; animation-delay: 4s; }
+    .heart:nth-child(4) { left: 65%; animation-delay: 1s; }
+    .heart:nth-child(5) { left: 85%; animation-delay: 3s; }
+
+    @keyframes float {
+      0% {
+        bottom: -50px;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+
+      20% {
+        opacity: 1;
+      }
+
+      100% {
+        bottom: 110vh;
+        transform: translateX(80px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    header .big-heart {
+      font-size: 75px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.15);
+      }
+    }
+
+    h1 {
+      font-size: clamp(40px, 8vw, 75px);
+      margin-top: 15px;
+      color: #c2185b;
+      text-shadow: 3px 3px rgba(255,255,255,0.6);
+    }
+
+    .subtitle {
+      margin-top: 15px;
+      font-size: 20px;
+      color: #9c2858;
+    }
+
+    .main {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .message {
+      background: rgba(255,255,255,0.65);
+      backdrop-filter: blur(10px);
+      border-radius: 30px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(170, 30, 90, 0.2);
+      margin-bottom: 35px;
+    }
+
+    .message h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+      color: #d81b60;
+    }
+
+    .message p {
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    /* Profile */
+    .profile {
+      background: #fff0f6;
+      border-radius: 30px;
+      padding: 35px;
+      box-shadow: 0 15px 40px rgba(170, 30, 90, 0.2);
+    }
+
+    .profile-title {
+      text-align: center;
+      font-size: 30px;
+      color: #c2185b;
+      margin-bottom: 25px;
+    }
+
+    .profile-info {
+      display: grid;
+      gap: 15px;
+    }
+
+    .info {
+      background: white;
+      border-radius: 18px;
+      padding: 18px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 5px 15px rgba(194, 24, 91, 0.08);
+    }
+
+    .label {
+      font-weight: bold;
+      color: #ad1457;
+    }
+
+    .value {
+      color: #e91e63;
+      font-weight: 600;
+    }
+
+    .letter {
+      font-size: 28px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      color: #9c2858;
+      font-size: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .message,
+      .profile {
+        padding: 25px;
+      }
+
+      .info {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Floating hearts -->
+  <div class="heart">💗</div>
+  <div class="heart">💕</div>
+  <div class="heart">💖</div>
+  <div class="heart">💗</div>
+  <div class="heart">💞</div>
+
+  <header>
+    <div class="big-heart">💗</div>
+
+    <h1>Pretty in Pink</h1>
+
+    <p class="subtitle">
+      For someone who loves pink more than any other colour 💕
+    </p>
+  </header>
+
+  <main class="main">
+
+    <section class="message">
+      <h2>💗 A Little Something About You 💗</h2>
+
+      <p>
+        Pink isn't just a colour here...
+        <br>
+        it's a whole personality. 🌸
+        <br><br>
+        Soft, bright, beautiful and impossible to ignore —
+        just like someone who would choose pink over every other colour. 💕
+      </p>
+    </section>
+
+    <section class="profile">
+
+      <h2 class="profile-title">💖 Profile 💖</h2>
+
+      <div class="profile-info">
+
+        <div class="info">
+          <span class="label">Gender</span>
+          <span class="value">Bisexual 💗💜💙</span>
+        </div>
+
+        <div class="info">
+          <span class="label">Favourite Colour</span>
+          <span class="value">Pink 🌸</span>
+        </div>
+
+        <div class="info">
+          <span class="label">Favourite Letter</span>
+          <span class="value letter">J 💕</span>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer>
+    Made with lots of pink & hearts 💗🌸💕
+  </footer>
+
+</body>
+</html>
