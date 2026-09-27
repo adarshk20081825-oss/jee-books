@@ -1,391 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pretty in Pink</title>
 
-  <title>Pretty in Pink 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+  :root {
+    --rose-900: #7a1d43;
+    --rose-700: #a8285e;
+    --rose-500: #d94f82;
+    --rose-300: #f3a9c6;
+    --rose-100: #fce8f0;
+    --blush: #fff6fa;
+    --cream: #fffdfc;
+    --ink: #4a1a30;
+    --line: #f0cfdd;
+    font-family: "Inter", -apple-system, "Segoe UI", sans-serif;
+  }
 
-    body {
-      font-family: "Poppins", Arial, sans-serif;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #ffd6e7, #ff9fc5, #ffc1dc);
-      color: #8b174f;
-      overflow-x: hidden;
-    }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Floating hearts */
-    .heart {
-      position: fixed;
-      color: rgba(255, 255, 255, 0.75);
-      font-size: 25px;
-      animation: float 7s linear infinite;
-      pointer-events: none;
-    }
+  body {
+    background: linear-gradient(180deg, var(--blush) 0%, #ffeef5 100%);
+    color: var(--ink);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
 
-    .heart:nth-child(1) { left: 10%; animation-delay: 0s; }
-    .heart:nth-child(2) { left: 25%; animation-delay: 2s; }
-    .heart:nth-child(3) { left: 45%; animation-delay: 4s; }
-    .heart:nth-child(4) { left: 65%; animation-delay: 1s; }
-    .heart:nth-child(5) { left: 85%; animation-delay: 3s; }
+  .bg-blob {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 0;
+    animation: drift 16s ease-in-out infinite;
+  }
 
-    @keyframes float {
-      0% {
-        bottom: -50px;
-        transform: translateX(0) rotate(0deg);
-        opacity: 0;
-      }
+  .bg-blob.b1 {
+    width: 320px; height: 320px;
+    top: -80px; left: -100px;
+    background: var(--rose-300);
+    animation-delay: 0s;
+  }
 
-      20% {
-        opacity: 1;
-      }
+  .bg-blob.b2 {
+    width: 260px; height: 260px;
+    top: 30%; right: -90px;
+    background: var(--rose-500);
+    animation-delay: -5s;
+  }
 
-      100% {
-        bottom: 110vh;
-        transform: translateX(80px) rotate(360deg);
-        opacity: 0;
-      }
-    }
+  .bg-blob.b3 {
+    width: 220px; height: 220px;
+    bottom: -60px; left: 20%;
+    background: var(--rose-100);
+    animation-delay: -10s;
+  }
 
-    header {
-      text-align: center;
-      padding: 60px 20px 30px;
-    }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33%      { transform: translate(30px, -20px) scale(1.08); }
+    66%      { transform: translate(-20px, 25px) scale(0.95); }
+  }
 
-    /* Photo */
-    .photo-stage {
-      position: relative;
-      width: 168px;
-      height: 168px;
-      margin: 0 auto 20px;
-    }
+  header, .main, footer, .accent-bar { position: relative; z-index: 1; }
 
-    .heart-burst {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 70px;
-      animation: heartBurst 1.4s ease-out forwards;
-      pointer-events: none;
-    }
+  @keyframes fadeUp {
+    0%   { opacity: 0; transform: translateY(18px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
 
-    @keyframes heartBurst {
-      0% {
-        transform: scale(0.6);
-        opacity: 1;
-      }
-      45% {
-        transform: scale(1.15);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(2.6);
-        opacity: 0;
-      }
-    }
+  .fade-in {
+    opacity: 0;
+    animation: fadeUp 0.7s ease-out forwards;
+  }
 
-    .photo-ring {
-      position: absolute;
-      inset: 0;
-      border-radius: 50%;
-      padding: 5px;
-      background: linear-gradient(135deg, #ff6fa5, #c2185b);
-      box-shadow: 0 12px 30px rgba(170, 30, 90, 0.35);
-      transform: scale(0);
-      opacity: 0;
-      animation:
-        popFromHeart 0.7s cubic-bezier(.34,1.56,.64,1) 0.6s forwards,
-        ringPulse 2.4s ease-in-out 1.4s infinite;
-    }
+  .accent-bar {
+    height: 5px;
+    background: linear-gradient(90deg, var(--rose-300), var(--rose-700), var(--rose-300));
+  }
 
-    @keyframes popFromHeart {
-      0% {
-        transform: scale(0);
-        opacity: 0;
-      }
-      60% {
-        transform: scale(1.08);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
+  header {
+    text-align: center;
+    padding: 72px 20px 44px;
+  }
 
-    @keyframes ringPulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.035); }
-    }
+  /* Photo */
+  .photo-stage {
+    position: relative;
+    width: 152px;
+    height: 152px;
+    margin: 0 auto 28px;
+  }
 
-    .photo-wrap img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 4px solid white;
-      display: block;
-      background: #fff0f6;
-    }
+  .heart-burst {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 58px;
+    color: var(--rose-300);
+    animation: heartBurst 1.3s ease-out forwards;
+    pointer-events: none;
+  }
 
-    /* Placeholder shown until a real photo is added */
-    .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 4px solid white;
-      background: linear-gradient(160deg, #fff0f6, #ffd6e7);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+  @keyframes heartBurst {
+    0%   { transform: scale(0.6); opacity: 1; }
+    45%  { transform: scale(1.05); opacity: 0.9; }
+    100% { transform: scale(2.2); opacity: 0; }
+  }
 
-    .photo-placeholder svg {
-      width: 60%;
-      height: 60%;
-      color: #c2185b;
-      opacity: 0.55;
-    }
+  .photo-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--rose-500), var(--rose-900));
+    box-shadow: 0 10px 28px rgba(122, 29, 67, 0.25);
+    transform: scale(0);
+    opacity: 0;
+    animation:
+      popFromHeart 0.6s cubic-bezier(.34,1.56,.64,1) 0.55s forwards,
+      ringPulse 3s ease-in-out 1.3s infinite;
+  }
 
-    .mini-heart {
-      position: absolute;
-      bottom: 2px;
-      right: 2px;
-      font-size: 26px;
-      opacity: 0;
-      animation: miniHeartIn 0.5s ease-out 1.1s forwards, miniHeartBeat 1.3s ease-in-out 1.6s infinite;
-      filter: drop-shadow(0 2px 4px rgba(170,30,90,0.4));
-    }
+  @keyframes popFromHeart {
+    0%   { transform: scale(0); opacity: 0; }
+    60%  { transform: scale(1.06); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
 
-    @keyframes miniHeartIn {
-      0% { transform: scale(0); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.02); }
+  }
 
-    @keyframes miniHeartBeat {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.25); }
-    }
+  .photo-ring img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--cream);
+    display: block;
+  }
 
-    .name {
-      font-size: clamp(28px, 6vw, 42px);
-      color: #c2185b;
-      font-weight: 700;
-      margin-bottom: 6px;
-      text-shadow: 2px 2px rgba(255,255,255,0.6);
-    }
+  .mini-heart {
+    position: absolute;
+    bottom: 0;
+    right: 2px;
+    font-size: 20px;
+    opacity: 0;
+    animation: miniHeartIn 0.45s ease-out 1.05s forwards, miniHeartBeat 1.6s ease-in-out 1.5s infinite;
+    filter: drop-shadow(0 2px 3px rgba(122,29,67,0.35));
+  }
 
-    header .big-heart {
-      font-size: 60px;
-      animation: pulse 1.5s infinite;
-      margin-bottom: 10px;
-    }
+  @keyframes miniHeartIn {
+    0%   { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
 
-    @keyframes pulse {
-      0%, 100% {
-        transform: scale(1);
-      }
+  @keyframes miniHeartBeat {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.18); }
+  }
 
-      50% {
-        transform: scale(1.15);
-      }
-    }
+  .eyebrow {
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--rose-500);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
 
-    h1 {
-      font-size: clamp(36px, 7vw, 65px);
-      margin-top: 10px;
-      color: #c2185b;
-      text-shadow: 3px 3px rgba(255,255,255,0.6);
-    }
+  .name {
+    font-family: "Playfair Display", serif;
+    font-size: clamp(30px, 5vw, 44px);
+    font-weight: 600;
+    color: var(--rose-900);
+    margin-bottom: 6px;
+  }
 
-    .subtitle {
-      margin-top: 15px;
-      font-size: 20px;
-      color: #9c2858;
-    }
+  h1 {
+    font-family: "Playfair Display", serif;
+    font-weight: 700;
+    font-size: clamp(32px, 6vw, 52px);
+    margin-top: 18px;
+    letter-spacing: 0.5px;
+    background: linear-gradient(100deg, var(--rose-900) 20%, var(--rose-500) 45%, var(--rose-300) 55%, var(--rose-900) 80%);
+    background-size: 250% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: shimmer 5s linear infinite, fadeUp 0.7s ease-out 0.5s backwards;
+  }
 
-    .main {
-      max-width: 900px;
-      margin: auto;
-      padding: 20px;
-    }
+  @keyframes shimmer {
+    0%   { background-position: 0% center; }
+    100% { background-position: -250% center; }
+  }
 
-    .message {
-      background: rgba(255,255,255,0.65);
-      backdrop-filter: blur(10px);
-      border-radius: 30px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 15px 40px rgba(170, 30, 90, 0.2);
-      margin-bottom: 35px;
-    }
+  .subtitle {
+    margin-top: 14px;
+    font-size: 16px;
+    color: var(--rose-700);
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    animation: fadeUp 0.7s ease-out 0.7s backwards;
+  }
 
-    .message h2 {
-      font-size: 32px;
-      margin-bottom: 15px;
-      color: #d81b60;
-    }
+  .divider {
+    width: 64px;
+    height: 3px;
+    margin: 22px auto 0;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--rose-300), var(--rose-700));
+    animation: growLine 0.8s ease-out 0.9s backwards;
+  }
 
-    .message p {
-      font-size: 18px;
-      line-height: 1.8;
-    }
+  @keyframes growLine {
+    0%   { width: 0; opacity: 0; }
+    100% { width: 64px; opacity: 1; }
+  }
 
-    /* Profile */
-    .profile {
-      background: #fff0f6;
-      border-radius: 30px;
-      padding: 35px;
-      box-shadow: 0 15px 40px rgba(170, 30, 90, 0.2);
-    }
+  .main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px 80px;
+  }
 
-    .profile-title {
-      text-align: center;
-      font-size: 30px;
-      color: #c2185b;
-      margin-bottom: 25px;
-    }
+  .card {
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 24px rgba(122, 29, 67, 0.06);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out, box-shadow 0.3s ease;
+  }
 
-    .profile-info {
-      display: grid;
-      gap: 15px;
-    }
+  .card.in-view {
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-    .info {
-      background: white;
-      border-radius: 18px;
-      padding: 18px 22px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 5px 15px rgba(194, 24, 91, 0.08);
-    }
+  .card:hover {
+    box-shadow: 0 14px 34px rgba(122, 29, 67, 0.14);
+  }
 
-    .label {
-      font-weight: bold;
-      color: #ad1457;
-    }
+  .card h2 {
+    font-family: "Playfair Display", serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--rose-900);
+    margin-bottom: 16px;
+    text-align: center;
+  }
 
-    .value {
-      color: #e91e63;
-      font-weight: 600;
-    }
+  .card p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink);
+    text-align: center;
+    max-width: 520px;
+    margin: 0 auto;
+  }
 
-    .letter {
-      font-size: 28px;
-    }
+  .profile-title {
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--rose-900);
+    margin-bottom: 24px;
+  }
 
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      color: #9c2858;
-      font-size: 16px;
-    }
+  .profile-info {
+    display: grid;
+    gap: 12px;
+  }
 
-    @media (max-width: 600px) {
-      .message,
-      .profile {
-        padding: 25px;
-      }
+  .info {
+    background: var(--blush);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    opacity: 0;
+    transform: translateX(-14px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
 
-      .info {
-        padding: 15px;
-      }
-    }
-  </style>
+  .info.in-view {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .info:hover {
+    box-shadow: 0 8px 20px rgba(122, 29, 67, 0.12);
+    border-color: var(--rose-300);
+    transform: translateX(4px);
+  }
+
+  .label {
+    font-weight: 600;
+    color: var(--rose-700);
+    font-size: 14px;
+    letter-spacing: 0.3px;
+  }
+
+  .value {
+    color: var(--rose-900);
+    font-weight: 600;
+    font-size: 15px;
+  }
+
+  footer {
+    text-align: center;
+    padding: 32px 20px 48px;
+    color: var(--rose-500);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  @media (max-width: 600px) {
+    .card { padding: 28px; }
+    .info { padding: 14px 16px; }
+  }
+</style>
 </head>
 
 <body>
 
-  <!-- Floating hearts -->
-  <div class="heart">💗</div>
-  <div class="heart">💕</div>
-  <div class="heart">💖</div>
-  <div class="heart">💗</div>
-  <div class="heart">💞</div>
+  <div class="accent-bar"></div>
 
   <header>
-    <!-- To add your own photo: delete the .photo-placeholder div below and
-         uncomment the <img> tag, then set its src to your photo URL -->
     <div class="photo-stage">
-      <div class="heart-burst">💗</div>
+      <div class="heart-burst">♥</div>
       <div class="photo-ring">
-        <div class="photo-placeholder">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 12c2.7 0 4.9-2.2 4.9-4.9S14.7 2.2 12 2.2 7.1 4.4 7.1 7.1 9.3 12 12 12zm0 2.4c-3.3 0-9.8 1.6-9.8 4.9v2.5h19.6v-2.5c0-3.3-6.5-4.9-9.8-4.9z"/>
-          </svg>
-        </div>
         <img src="https://adarshk20081825-oss.github.io/jee-books/Screenshot%202026-09-24%20214652.png" alt="Photo">
       </div>
-      <div class="mini-heart">💕</div>
+      <div class="mini-heart">♥</div>
     </div>
 
-    <!-- Replace YOUR NAME with the name you want highlighted -->
-    <div class="name">ADWAITH</div>
-
-    <div class="big-heart">💗</div>
+    <div class="eyebrow fade-in" style="animation-delay:0.2s">Featuring</div>
+    <div class="name fade-in" style="animation-delay:0.35s">Adwaith</div>
 
     <h1>Pretty in Pink</h1>
 
-    <p class="subtitle">
-      For someone who loves pink more than any other colour 💕
-    </p>
+    <p class="subtitle">For someone who loves pink more than any other colour</p>
+    <div class="divider"></div>
   </header>
 
   <main class="main">
 
-    <section class="message">
-      <h2>💗 A Little Something About You 💗</h2>
-
+    <section class="card">
+      <h2>A Little Something About You</h2>
       <p>
-        Pink isn't just a colour here...
-        <br>
-        it's a whole personality. 🌸
-        <br><br>
-        Soft, bright, beautiful and impossible to ignore —
-        just like someone who would choose pink over every other colour. 💕
+        Pink isn't just a colour here — it's a whole personality.
+        Soft, bright, and impossible to ignore, just like someone
+        who would choose pink over every other colour.
       </p>
     </section>
 
-    <section class="profile">
-
-      <h2 class="profile-title">💖 Profile 💖</h2>
-
+    <section class="card">
+      <div class="profile-title">Profile</div>
       <div class="profile-info">
-
-        <div class="info">
-          <span class="label">Gender</span>
-          <span class="value">Bisexual 💗💜💙</span>
-        </div>
-
         <div class="info">
           <span class="label">Favourite Colour</span>
-          <span class="value">Pink 🌸</span>
+          <span class="value">Pink</span>
         </div>
-
         <div class="info">
           <span class="label">Favourite Letter</span>
-          <span class="value letter">J 💕</span>
+          <span class="value">J</span>
         </div>
-
       </div>
-
     </section>
 
   </main>
 
   <footer>
-    Made with lots of pink & hearts 💗🌸💕
+    Made with care &amp; a little pink
   </footer>
+
+  <div class="bg-blob b1"></div>
+  <div class="bg-blob b2"></div>
+  <div class="bg-blob b3"></div>
+
+  <script>
+    const revealEls = document.querySelectorAll('.card, .info');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('in-view'), i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => observer.observe(el));
+  </script>
 
 </body>
 </html>
